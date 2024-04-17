@@ -1,0 +1,54 @@
+﻿@page
+@model RazorCrud.Pages.ProductModel
+@{
+    <div class="row">
+        <div class="col-md-6 ">
+            <label class="text-danger">@TempData["ErrorMsg"]</label>
+            <div asp-validation-summary="All"></div>
+            <form method="post">
+                <table class=" table table-borderless">
+                    <tr>
+                        <td>
+                            <label>ProductName</label>
+                            <input asp-for="Product.ProductName" class="form-control" />
+                            <span asp-validation-for="Product.ProductName"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>Price</label>
+                            <input asp-for="Product.Price" class="form-control" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="submit" class="btn btn-primary" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <thead class="bg-info">
+                    <tr>
+                        <td>Product Name</td>
+                        <td>Price</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.allProducts)
+                    {
+                        <tr>
+                            <td>@item.ProductName</td>
+                            <td>@item.Price</td>
+                            <td>
+                                <a asp-page="DeleteProduct" asp-route-id="@item.ID">Remove</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}
